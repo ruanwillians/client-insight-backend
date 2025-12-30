@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/client-insight-backend-core-e2e"
+    },
+    {
+      "path": "./apps/client-insight-backend-core"
+    }
+  ]
+}
