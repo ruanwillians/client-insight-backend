@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/client-insight-backend",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/client-insight-backend/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/client-insight-backend",
+  "projects": {
+    "client-insight-backend-core": {
+      "type": "application",
+      "root": "apps/client-insight-backend-core",
+      "entryFile": "main",
+      "sourceRoot": "apps/client-insight-backend-core/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/client-insight-backend-core/tsconfig.app.json"
+      }
+    },
+    "client-insights-feedback": {
+      "type": "application",
+      "root": "apps/client-insights-feedback",
+      "entryFile": "main",
+      "sourceRoot": "apps/client-insights-feedback/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/client-insights-feedback/tsconfig.app.json"
+      }
+    },
+    "telemetry": {
+      "type": "library",
+      "root": "libs/telemetry",
+      "entryFile": "index",
+      "sourceRoot": "libs/telemetry/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/telemetry/tsconfig.lib.json"
+      }
+    }
+  }
+}
