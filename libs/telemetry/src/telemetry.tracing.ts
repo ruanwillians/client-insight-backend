@@ -5,23 +5,32 @@ import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
 import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-http';
 import { BatchLogRecordProcessor } from '@opentelemetry/sdk-logs';
 import { HttpInstrumentation } from '@opentelemetry/instrumentation-http';
+import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-http';
+import { PeriodicExportingMetricReader } from '@opentelemetry/sdk-metrics';
 
 export const initializeTelemetry = (serviceName: string) => {
   const sdk = new opentelemetry.NodeSDK({
     serviceName: serviceName,
     traceExporter: new OTLPTraceExporter({
-      url: process.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT || (process.env.OTEL_EXPORTER_OTLP_ENDPOINT ? `${process.env.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/traces` : undefined),
+      url:
+        process.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
     }),
     logRecordProcessor: new BatchLogRecordProcessor(
       new OTLPLogExporter({
-        url: process.env.OTEL_EXPORTER_OTLP_LOGS_ENDPOINT || (process.env.OTEL_EXPORTER_OTLP_ENDPOINT ? `${process.env.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/logs` : undefined),
-      })
+        url:
+          process.env.OTEL_EXPORTER_OTLP_LOGS_ENDPOINT
+      }),
     ),
     instrumentations: [
       new HttpInstrumentation(),
       new NestInstrumentation(),
       getNodeAutoInstrumentations(),
     ],
+    metricReader: new PeriodicExportingMetricReader({
+      exporter: new OTLPMetricExporter({
+        url: process.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT,
+      }),
+    }),
   });
 
   sdk.start();

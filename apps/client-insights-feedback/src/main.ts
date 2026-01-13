@@ -1,7 +1,4 @@
-import {
-  initializeTelemetry,
-  OtelLogger,
-} from '@lib/telemetry';
+import { initializeTelemetry, OtelLogger } from '@lib/telemetry';
 initializeTelemetry('client-insights-feedback');
 
 import { NestFactory } from '@nestjs/core';
