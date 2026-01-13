@@ -2,7 +2,7 @@ import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { logs, SeverityNumber } from '@opentelemetry/api-logs';
 
 @Injectable()
-export class OtelLogger extends ConsoleLogger {
+export class AppLogger extends ConsoleLogger {
   private otelLogger: ReturnType<typeof logs.getLogger>;
 
   constructor(context?: string) {
@@ -53,9 +53,9 @@ export class OtelLogger extends ConsoleLogger {
       attributes:
         attributes && Object.keys(attributes).length > 0
           ? {
-              ...attributes,
-              context: logContext,
-            }
+            ...attributes,
+            context: logContext,
+          }
           : { context: logContext },
     });
   }

@@ -1,7 +1,12 @@
 import { Module } from '@nestjs/common';
+import { initializeTelemetry } from './telemetry.tracing';
+import { AppLogger } from './telemetry.logger';
 
 @Module({
   providers: [],
-  exports: [],
+  exports: [
+    initializeTelemetry,
+    AppLogger
+  ],
 })
-export class TelemetryModule {}
+export class TelemetryModule { }
