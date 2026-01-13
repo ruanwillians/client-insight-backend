@@ -22,10 +22,10 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@app/telemetry": [
+      "@lib/telemetry": [
         "libs/telemetry/src"
       ],
-      "@app/telemetry/*": [
+      "@lib/telemetry/*": [
         "libs/telemetry/src/*"
       ]
     }

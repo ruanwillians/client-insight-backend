@@ -19,7 +19,7 @@
     "test:e2e:core": "jest --config ./apps/client-insight-backend-core/test/jest-e2e.json",
     "--- FEEDBACK ---": "---",
     "build:feedback": "nest build client-insights-feedback",
-    "start:dev:feedback": "dotenv -e .env -- nest start --watch client-insights-feedback",
+    "start:dev:feedback": "dotenv -e apps/client-insights-feedback/.env -- nest start --watch client-insights-feedback",
     "start:prod:feedback": "node dist/apps/client-insights-feedback/main",
     "test:e2e:feedback": "jest --config ./apps/client-insights-feedback/test/jest-e2e.json"
   },
@@ -84,7 +84,11 @@
     "coverageDirectory": "./coverage",
     "testEnvironment": "node",
     "roots": [
-      "<rootDir>/apps/"
-    ]
+      "<rootDir>/apps/",
+      "<rootDir>/libs/"
+    ],
+    "moduleNameMapper": {
+      "^@lib/telemetry(|/.*)$": "<rootDir>/libs/telemetry/src/$1"
+    }
   }
 }

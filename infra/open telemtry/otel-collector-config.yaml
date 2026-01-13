@@ -7,29 +7,40 @@ receivers:
         endpoint: 0.0.0.0:4318
 
 exporters:
-  jaeger:
-    endpoint: jaeger:14250
+  
+  otlp/tempo:
+    endpoint: tempo:4317
     tls:
       insecure: true
-  
+
   loki:
     endpoint: "http://loki:3100/loki/api/v1/push"
     tls:
       insecure: true
 
-  logging:
-    loglevel: debug
+  debug:
+    verbosity: detailed
 
 processors:
   batch:
+  resource:
+    attributes:
+      - action: insert
+        key: loki.resource.labels
+        value: service.name
+  transform:
+    log_statements:
+      - context: log
+        statements:
+          - set(body, Concat([body, " trace_id=", String(trace_id)], "")) where trace_id != nil
 
 service:
   pipelines:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [jaeger, logging]
+      exporters: [otlp/tempo, debug]
     logs:
       receivers: [otlp]
-      processors: [batch]
-      exporters: [loki, logging]
+      processors: [transform, resource, batch]
+      exporters: [loki, debug]

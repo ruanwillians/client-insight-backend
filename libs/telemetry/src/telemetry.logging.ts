@@ -7,7 +7,8 @@ import { logs } from '@opentelemetry/api-logs';
 
 export const initializeLogging = () => {
   const logExporter = new OTLPLogExporter({
-    url: `${process.env.OTEL_EXPORTER_OTLP_ENDPOINT}`,
+    url:
+      process.env.OTEL_EXPORTER_OTLP_LOGS_ENDPOINT
   });
 
   const loggerProvider = new LoggerProvider({

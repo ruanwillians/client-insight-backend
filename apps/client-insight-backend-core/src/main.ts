@@ -2,7 +2,7 @@ import {
   initializeTelemetry,
   initializeLogging,
   OtelLogger,
-} from '@app/telemetry';
+} from '@lib/telemetry';
 initializeTelemetry('client-insight-backend-core');
 initializeLogging();
 
@@ -13,6 +13,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: new OtelLogger(),
   });
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 3001);
 }
 bootstrap();
