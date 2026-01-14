@@ -1,5 +1,5 @@
 # Build stage
-FROM node:22-alpine AS builder
+FROM node:24.13.0-alpine AS builder
 
 # Set working directory
 WORKDIR /usr/src/app
@@ -23,7 +23,7 @@ RUN npx nest build client-insights-feedback
 
 
 # Production stage
-FROM node:22-alpine AS runner
+FROM node:24.13.0-alpine AS runner
 
 # Install dumb-init for proper signal handling
 RUN apk add --no-cache dumb-init curl
