@@ -1,7 +1,4 @@
-import {
-  initializeTelemetry,
-  AppLogger,
-} from '@lib/telemetry';
+import { initializeTelemetry, AppLogger } from '@lib/telemetry';
 initializeTelemetry('client-insight-backend-core');
 
 import { NestFactory } from '@nestjs/core';

@@ -12,13 +12,11 @@ export const initializeTelemetry = (serviceName: string) => {
   const sdk = new opentelemetry.NodeSDK({
     serviceName: serviceName,
     traceExporter: new OTLPTraceExporter({
-      url:
-        process.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+      url: process.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT,
     }),
     logRecordProcessor: new BatchLogRecordProcessor(
       new OTLPLogExporter({
-        url:
-          process.env.OTEL_EXPORTER_OTLP_LOGS_ENDPOINT
+        url: process.env.OTEL_EXPORTER_OTLP_LOGS_ENDPOINT,
       }),
     ),
     instrumentations: [

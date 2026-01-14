@@ -8,4 +8,4 @@ import { AppLogger } from '@lib/telemetry';
   controllers: [AppController],
   providers: [AppService, AppLogger],
 })
-export class AppModule { }
+export class AppModule {}

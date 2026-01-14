@@ -53,9 +53,9 @@ export class AppLogger extends ConsoleLogger {
       attributes:
         attributes && Object.keys(attributes).length > 0
           ? {
-            ...attributes,
-            context: logContext,
-          }
+              ...attributes,
+              context: logContext,
+            }
           : { context: logContext },
     });
   }

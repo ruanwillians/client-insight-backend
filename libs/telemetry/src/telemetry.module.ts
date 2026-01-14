@@ -4,9 +4,6 @@ import { AppLogger } from './telemetry.logger';
 
 @Module({
   providers: [],
-  exports: [
-    initializeTelemetry,
-    AppLogger
-  ],
+  exports: [initializeTelemetry, AppLogger],
 })
-export class TelemetryModule { }
+export class TelemetryModule {}
